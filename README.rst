@@ -1,17 +1,35 @@
-jsdoc22jsx
-==========
+jsdoc2jsx
+=========
 
-JSDoc Toolkit(JSDoc2) template to generate JSX code wrapper.
+This is a JSX code warpper generator program. It uses JSDoc Toolkit information to generate
+wrapper.
 
-This template can't create perfect wapper code. You should modify
-the result file.
+.. note::
 
-Pass json folder by using ``-t`` option.
+   This template can't create perfect wapper code. You should modify
+   the result file.
+
+Install
+-------
 
 .. code-block:: bash
 
-   $ npm install jsdoc2
-   $ node_modules/jsdoc2/app/run.js -t ./jsx [source folder]
+   $ npm install jsdoc2jsx
+
+Run
+---
+
+.. code-block:: bash
+
+   $ node_modules/.bin/jsdoc2jsx -d=out [source folder]
+
+This project contains a complete JSDoc Toolkit template (``jsxtemplate`` folder).
+You can use this template seperately.
+
+Author
+------
+
+Yoshiki Shibukawa <yoshiki at shibu.jp>
 
 Licnese
 -------

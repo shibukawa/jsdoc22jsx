@@ -1,10 +1,23 @@
 /** Called automatically by JsDoc Toolkit. */
-function publish(symbolSet) {
+function publish(symbolSet)
+{
     publish.conf = {  // trailing slash expected for dirs
         ext:         ".jsx",
         outDir:      JSDOC.opt.d || SYS.pwd+"../out/"
     };
+    try
+    {
+        var json = read(symbolSet);
+        write(json);
+    }
+    catch (e)
+    {
+        console.log(e.stack);
+    }
+}
 
+function read(symbolSet)
+{
     symbolSet.deleteSymbol("_global_");
     symbolSet.deleteSymbol("Error");
 
@@ -25,14 +38,14 @@ function publish(symbolSet) {
         var currentChildren = masterGroup.classes;
         var json = processData(classobj);
         var names = json.alias.split('.');
-        console.log(names);
-        while (names.length)
+        while (names.length > 0)
         {
             groupName = names.shift();
             if (!currentChildren[groupName])
             {
                 currentChildren[groupName] = {
-                    classes: {}
+                    classes: {},
+                    name: groupName
                 };
             }
             currentGroup = currentChildren[groupName];
@@ -40,12 +53,17 @@ function publish(symbolSet) {
         }
         currentGroup.obj = json;
     });
+    return masterGroup;
+}
+
+function write(json)
+{
     //console.log(JSON.stringify(masterGroup, null, '    '));
-    for (var key in masterGroup.classes)
+    for (var key in json.classes)
     {
-        if (masterGroup.classes.hasOwnProperty(key))
+        if (json.classes.hasOwnProperty(key))
         {
-            var sourceCode = dumpCode(masterGroup.classes[key]);
+            var sourceCode = dumpCode(json.classes[key]);
             IO.saveFile(publish.conf.outDir, key.toLowerCase() + publish.conf.ext, sourceCode);
         }
     }
@@ -149,14 +167,14 @@ function dumpCode(json, code, depth)
         initial = true;
         code = [];
         depth = 1;
-        code.push('class ', json.obj.name, '\n');
+        //console.log(JSON.stringify(json, null, '    '));
+        code.push('class ', json.name, '\n');
         code.push('{\n');
     }
     for (var key in json.classes)
     {
         if (json.classes.hasOwnProperty(key))
         {
-            console.log("writing:", key);
             code.push('\n');
             var group = json.classes[key];
             var obj = group.obj;

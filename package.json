@@ -1,0 +1,32 @@
+{
+  "name": "jsdoc2jsx",
+  "version": "0.1.0",
+  "description": "JSX wrapper generator from JSDoc Toolkit doc comment",
+  "bin": {
+    "jsdoc2jsx": "./bin/jsdoc2jsx.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+      "jsdoc2": "2.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shibukawa/jsdoc22jsx.git"
+  },
+  "keywords": [
+    "jsdoc2",
+    "jsx",
+    "wrapper",
+    "generator"
+  ],
+  "author": "Yoshiki Shibukawa",
+  "license": {
+      "type": "MIT",
+      "url": "http://shibu.mit-license.org/"
+  },
+  "bugs": {
+    "url": "https://github.com/shibukawa/jsdoc22jsx/issues"
+  }
+}
