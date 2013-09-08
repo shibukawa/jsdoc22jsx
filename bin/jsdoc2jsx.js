@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+var path = require('path');
+var templatePath = path.resolve(__dirname, '../jsxtemplate');
+
 var newargv = [];
 
 for (var i = 0; i < process.argv.length; i++)
@@ -14,7 +17,7 @@ for (var i = 0; i < process.argv.length; i++)
     }
 }
 
-newargv.splice(2, 0, '-t=./jsxtemplate');
+newargv.splice(2, 0, '-t=' + templatePath);
 
 process.argv = newargv;
 
